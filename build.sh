@@ -2,7 +2,7 @@
 # Quick script to make portable builds of squashfuse on Ubuntu 18.04
 # The libraries I chose to statically link are based on <github.com/AppImage/pkg2appimage/blob/master/excludelist>
 
-sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc
+sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev
 
 git clone https://github.com/vasi/squashfuse
 cd squashfuse
