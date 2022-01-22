@@ -15,3 +15,9 @@ ln -s /usr/lib/*/libzstd.a static/lib
 
 ./autogen.sh
 ./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+
+strip -s squashfuse squashfuse_extract squahfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_$ARCH
+mv squashfuse_extract ../squashfuse_extract_$ARCH
+mv squashfuse_ll../squashfuse_ll_$ARCH
+mv squashfuse_ls../squashfuse_ls_$ARCH
