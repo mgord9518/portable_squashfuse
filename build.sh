@@ -4,21 +4,8 @@
 
 [ -z $ARCH ] && ARCH=$(uname -m)
 
-# Add AARCH64 arch
-sudo dpkg --add-architecture arm64
+sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev
 
-echo 'deb [arch=arm64] http://ports.ubuntu.com/ bionic main restricted
-deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates main restricted
-deb [arch=arm64] http://ports.ubuntu.com/ bionic universe
-deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates universe
-deb [arch=arm64] http://ports.ubuntu.com/ bionic multiverse
-deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates multiverse
-deb [arch=arm64] http://ports.ubuntu.com/ bionic-backports main restricted universe multiverse' | sudo tee -a /etc/apt/sources.list.d/arm-cross-compile-sources.list
-
-sudo sed -i 's/deb/deb [arch=amd64]/g' /etc/apt/sources.list
-
-sudo apt update
-sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev 
 git clone https://github.com/vasi/squashfuse
 cd squashfuse
 mkdir -p static/lib
@@ -31,72 +18,51 @@ ln -s /usr/lib/*/libzstd.a static/lib
 ./autogen.sh
 
 # All supported compression methods
-#./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
-#make
-#
-#strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-#mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
-#mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
-#mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
-#mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
-#
-#sudo apt remove gcc libfuse-dev # liblzma-dev libzstd-dev liblz4-dev zlib1g-dev 
-#sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 libfuse-dev:arm64 gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
-
-# Compile for AARCH64
-rm static/lib/*
-ln -s /usr/lib/aarch64-linux-gnu/liblz4.a  static/lib
-ln -s /usr/lib/aarch64-linux-gnu/liblzma.a static/lib
-ln -s /usr/lib/aarch64-linux-gnu/libzstd.a static/lib
-
-export ARCH=aarch64
-./configure CC=arm-linux-gnueabi-gcc  --host=aarch64-linux-gnu --build=x86_64-linux-gnu --disable-shared --with-lz4=./static --without-xz --without-zstd 
-#./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static --host=aarch64-unknown-linux-gnu
+./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
 make
-file `readlink static/lib/liblzma.a`
-file static/lib/liblzma.a
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
 mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
 mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
 mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
-## ZLIB, LZ4 and XZ
-#./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
-#make
-#
-#strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-#mv squashfuse ../squashfuse_lz4_xz.$ARCH
-#mv squashfuse_extract ../squashfuse_extract_lz4_xz.$ARCH
-#mv squashfuse_ll ../squashfuse_ll_lz4_xz.$ARCH
-#mv squashfuse_ls ../squashfuse_ls_lz4_xz.$ARCH
-#
-## ZLIB, LZ4
-#./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
-#make
-#
-#strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-#mv squashfuse ../squashfuse_lz4.$ARCH
-#mv squashfuse_extract ../squashfuse_extract_lz4.$ARCH
-#mv squashfuse_ll ../squashfuse_ll_lz4.$ARCH
-#mv squashfuse_ls ../squashfuse_ls_lz4.$ARCH
-#
-## ZLIB, XZ
-#./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
-#make
-#
-#strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-#mv squashfuse ../squashfuse_xz.$ARCH
-#mv squashfuse_extract ../squashfuse_extract_xz.$ARCH
-#mv squashfuse_ll ../squashfuse_ll_xz.$ARCH
-#mv squashfuse_ls ../squashfuse_ls_xz.$ARCH
-#
-## ZLIB, ZSTD
-#./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
-#make
-#
-#strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-#mv squashfuse ../squashfuse_zstd.$ARCH
-#mv squashfuse_extract ../squashfuse_extract_zstd.$ARCH
-#mv squashfuse_ll ../squashfuse_ll_zstd.$ARCH
-#mv squashfuse_ls ../squashfuse_ls_zstd.$ARCH
+
+# ZLIB, LZ4 and XZ
+./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
+make
+
+strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_lz4_xz.$ARCH
+mv squashfuse_extract ../squashfuse_extract_lz4_xz.$ARCH
+mv squashfuse_ll ../squashfuse_ll_lz4_xz.$ARCH
+mv squashfuse_ls ../squashfuse_ls_lz4_xz.$ARCH
+
+# ZLIB, LZ4
+./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
+make
+
+strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_lz4.$ARCH
+mv squashfuse_extract ../squashfuse_extract_lz4.$ARCH
+mv squashfuse_ll ../squashfuse_ll_lz4.$ARCH
+mv squashfuse_ls ../squashfuse_ls_lz4.$ARCH
+
+# ZLIB, XZ
+./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
+make
+
+strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_xz.$ARCH
+mv squashfuse_extract ../squashfuse_extract_xz.$ARCH
+mv squashfuse_ll ../squashfuse_ll_xz.$ARCH
+mv squashfuse_ls ../squashfuse_ls_xz.$ARCH
+
+# ZLIB, ZSTD
+./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
+make
+
+strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_zstd.$ARCH
+mv squashfuse_extract ../squashfuse_extract_zstd.$ARCH
+mv squashfuse_ll ../squashfuse_ll_zstd.$ARCH
+mv squashfuse_ls ../squashfuse_ls_zstd.$ARCH
