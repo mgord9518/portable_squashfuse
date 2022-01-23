@@ -40,7 +40,7 @@ mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
 mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
 
-sudo apt remove zlib1g-dev liblzma-dev libzstd-dev liblz4-dev gcc libfuse-dev 
+sudo apt remove gcc libfuse-dev # liblzma-dev libzstd-dev liblz4-dev zlib1g-dev 
 sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 libfuse-dev:arm64 gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
 
 # Compile for AARCH64
