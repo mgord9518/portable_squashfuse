@@ -4,7 +4,21 @@
 
 [ -z $ARCH ] && ARCH=$(uname -m)
 
-sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev
+# Add AARCH64 arch
+dpkg --add-architecture arm64
+
+echo 'deb [arch=arm64] http://ports.ubuntu.com/ bionic main restricted
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates main restricted
+deb [arch=arm64] http://ports.ubuntu.com/ bionic universe
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates universe
+deb [arch=arm64] http://ports.ubuntu.com/ bionic multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ bionic-backports main restricted universe multiverse' > /etc/apt/sources.list.d/arm-cross-compile-sources.list
+
+sed -i 's/deb/deb [arch=amd64]/g' /etc/apt/sources.list
+
+apt update
+apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 make:arm64 gcc:arm64 libfuse-dev:arm64
 
 git clone https://github.com/vasi/squashfuse
 cd squashfuse
