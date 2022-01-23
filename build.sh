@@ -50,7 +50,7 @@ ln -s /usr/lib/*/liblzma.a static/lib
 ln -s /usr/lib/*/libzstd.a static/lib
 
 export ARCH=aarch64
-./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static --host=aarch64-unknown-linux-gnu
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
