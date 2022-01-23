@@ -45,12 +45,12 @@ sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev
 
 # Compile for AARCH64
 rm static/lib/*
-ln -s /usr/lib/*/liblz4.a  static/lib
-ln -s /usr/lib/*/liblzma.a static/lib
-ln -s /usr/lib/*/libzstd.a static/lib
+ln -s /usr/lib/aarch64-linux-gnu/liblz4.a  static/lib
+ln -s /usr/lib/aarch64-linux-gnu/liblzma.a static/lib
+ln -s /usr/lib/aarch64-linux-gnu/libzstd.a static/lib
 
 export ARCH=aarch64
-./configure CC=arm-linux-gnueabi-gcc --disable-shared --without-lz4 --without-xz --without-zstd --host=aarch64-unknown-linux-gnu
+./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --without-xz --without-zstd --host=aarch64-unknown-linux-gnu
 #./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static --host=aarch64-unknown-linux-gnu
 make
 file `readlink static/lib/liblzma.a`
