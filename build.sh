@@ -18,8 +18,7 @@ deb [arch=arm64] http://ports.ubuntu.com/ bionic-backports main restricted unive
 sudo sed -i 's/deb/deb [arch=amd64]/g' /etc/apt/sources.list
 
 sudo apt update
-sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 make:arm64 gcc:arm64 libfuse-dev:arm64
-
+sudo apt install zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev 
 git clone https://github.com/vasi/squashfuse
 cd squashfuse
 mkdir -p static/lib
@@ -41,6 +40,24 @@ mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
 mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
 
+sudo apt remove zlib1g-dev liblzma-dev libzstd-dev liblz4-dev gcc libfuse-dev 
+sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 libfuse-dev:arm64 gcc-arm-linux-gnueabi
+
+# Compile for AARCH64
+ln -s /usr/lib/*/liblz4.a  static/lib
+ln -s /usr/lib/*/liblzma.a static/lib
+ln -s /usr/lib/*/libzstd.a static/lib
+
+export CC=gcc-arm-linux-gnueabi
+export ARCH=aarch64
+./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+make
+
+strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
+mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
+mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
+mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
+mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
 ## ZLIB, LZ4 and XZ
 #./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
 #make
