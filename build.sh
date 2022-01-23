@@ -50,7 +50,7 @@ ln -s /usr/lib/aarch64-linux-gnu/liblzma.a static/lib
 ln -s /usr/lib/aarch64-linux-gnu/libzstd.a static/lib
 
 export ARCH=aarch64
-./configure --host=aarch64-unknown-linux-gnu CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --without-xz --without-zstd 
+./configure --host=aarch64-unknown-linux-gnu --build=x86_64-linux-gnu --disable-shared --with-lz4=./static --without-xz --without-zstd 
 #./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static --host=aarch64-unknown-linux-gnu
 make
 file `readlink static/lib/liblzma.a`
