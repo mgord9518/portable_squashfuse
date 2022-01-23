@@ -1,0 +1,20 @@
+language: bash
+sudo: require
+dist: bionic
+
+arch:
+  - amd64
+  - arm64
+
+script:
+  # 64-bit
+  - ./build.sh
+  
+after_success:
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh squashfuse*
+  
+branches:
+  except:
+    - # Do not build tags that we create when we upload to GitHub Releases
+    - /^(?i:continuous)/
