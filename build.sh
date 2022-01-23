@@ -52,6 +52,8 @@ ln -s /usr/lib/*/libzstd.a static/lib
 export ARCH=aarch64
 ./configure CC=arm-linux-gnueabi-gcc --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static --host=aarch64-unknown-linux-gnu
 make
+file `readlink static/lib/liblzma.a`
+file static/lib/liblzma.a
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
 mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
