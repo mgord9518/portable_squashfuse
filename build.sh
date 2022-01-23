@@ -44,10 +44,10 @@ ln -s /usr/lib/*/libzstd.a static/lib
 #sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 libfuse-dev:arm64 gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
 
 # Compile for AARCH64
-#rm static/lib/*
-#ln -s /usr/lib/aarch64-linux-gnu/liblz4.a  static/lib
-#ln -s /usr/lib/aarch64-linux-gnu/liblzma.a static/lib
-#ln -s /usr/lib/aarch64-linux-gnu/libzstd.a static/lib
+rm static/lib/*
+ln -s /usr/lib/aarch64-linux-gnu/liblz4.a  static/lib
+ln -s /usr/lib/aarch64-linux-gnu/liblzma.a static/lib
+ln -s /usr/lib/aarch64-linux-gnu/libzstd.a static/lib
 
 export ARCH=aarch64
 ./configure CC=arm-linux-gnueabi-gcc  --host=aarch64-linux-gnu --build=x86_64-linux-gnu --disable-shared --with-lz4=./static --without-xz --without-zstd 
