@@ -44,13 +44,13 @@ sudo apt remove zlib1g-dev liblzma-dev libzstd-dev liblz4-dev gcc libfuse-dev
 sudo apt install zlib1g-dev:arm64 liblzma-dev:arm64 libzstd-dev:arm64 liblz4-dev:arm64 libfuse-dev:arm64 gcc-arm-linux-gnueabi
 
 # Compile for AARCH64
+rm static/lib/*
 ln -s /usr/lib/*/liblz4.a  static/lib
 ln -s /usr/lib/*/liblzma.a static/lib
 ln -s /usr/lib/*/libzstd.a static/lib
 
-export CC=gcc-arm-linux-gnueabi
 export ARCH=aarch64
-./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+./configure CC=gcc-arm-linux-gnueabi --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
