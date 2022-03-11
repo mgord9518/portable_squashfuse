@@ -13,7 +13,7 @@ sudo mount -o bind /tmp chroot/tmp/
 sudo mount -o bind /dev chroot/dev/
 sudo mount --rbind /run/systemd chroot/run/systemd
 
-sudo cat << EOF | chroot chroot
+cat << EOF | sudo chroot chroot
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
 sh build.sh
 EOF
