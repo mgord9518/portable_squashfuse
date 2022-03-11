@@ -1,9 +1,9 @@
 #!/bin/sh
 
 sudo apt install qemu-system-arm binfmt-support
-update-binfmts --enable qemu-arm
-update-binfmts --display qemu-arm
-sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+sudo update-binfmts --enable qemu-arm
+sudo update-binfmts --display qemu-arm
+#sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 sudo echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register
 
 wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
