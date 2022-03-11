@@ -1,0 +1,27 @@
+name: Automatic build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build x86
+      run: ./build.sh
+
+    - name: Build aarch64
+      run: ./build-aarch64.sh
+  
+    - name: Upload build
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "nightly"
+        prerelease: true
+        title: "Nightly Build"
+        files: |
+          squashfuse* chroot/root/squashfuse*
