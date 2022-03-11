@@ -7,7 +7,8 @@ cp /usr/bin/qemu-system-arm upper/usr/bin
 sudo mount -t squashfs bionic-server-cloudimg-arm64.squashfs sfsmnt
 sudo mount -t overlay overlay -olowerdir=sfsmnt,upperdir=upper,workdir=work chroot
 
-sudo mount -t proc proc chroot/proc/
+sudo mount -o bind /proc chroot/proc/
+
 sudo mount -t sysfs sys chroot/sys/
 sudo mount -o bind /tmp chroot/tmp/
 sudo mount -o bind /dev chroot/dev/
