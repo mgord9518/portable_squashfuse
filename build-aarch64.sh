@@ -1,6 +1,9 @@
 #!/bin/sh
 
-sudo apt install qemu-system-arm
+sudo apt install qemu-system-arm binfmt-support
+update-binfmts --enable qemu-arm
+update-binfmts --display qemu-arm
+
 wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
 mkdir -p chroot/tmp chroot/dev chroot/proc chroot/sys sfsmnt upper/usr/bin work
 cp /usr/bin/qemu-system-arm upper/usr/bin
