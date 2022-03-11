@@ -10,8 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build
+    - name: Build x86
       run: ./build.sh
+
+    - name: Build aarch64
+      run: ./build-aarch64.sh
   
     - name: Upload build
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -21,4 +24,4 @@ jobs:
         prerelease: true
         title: "Nightly Build"
         files: |
-          squashfuse*
+          squashfuse* chroot/root/squashfuse*
