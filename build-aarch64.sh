@@ -3,7 +3,7 @@
 sudo apt install qemu-system-arm
 wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
 mkdir -p chroot/tmp chroot/dev chroot/proc chroot/sys sfsmnt upper/usr/bin work
-cp /usr/bin/sudo apt-get install qemu-system-arm upper/usr/bin
+cp /usr/bin/qemu-system-arm upper/usr/bin
 sudo mount -t squashfs bionic-server-cloudimg-arm64.squashfs sfsmnt
 sudo mount -t overlay overlay -olowerdir=sfsmnt,upperdir=upper,workdir=work chroot
 
