@@ -20,6 +20,8 @@ sudo mount -o bind /dev chroot/dev/
 sudo mount --rbind /run/systemd chroot/run/systemd
 
 mount
+ls /run
+ls $XDG_RUNTIME_DIR
 
 cat << EOF | sudo chroot chroot /bin/bash
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
