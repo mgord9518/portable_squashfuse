@@ -18,6 +18,7 @@ sudo mount -t sysfs sys chroot/sys/
 sudo mount -o bind /tmp chroot/tmp/
 sudo mount -o bind /dev chroot/dev/
 sudo mount --rbind /run/systemd chroot/run/systemd
+ls
 
 mount
 #ls /run
