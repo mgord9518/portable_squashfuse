@@ -2,7 +2,7 @@ name: Automatic build
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 1 * *'
 
 jobs:
   build:
@@ -24,4 +24,5 @@ jobs:
         prerelease: true
         title: "Nightly Build"
         files: |
-          squashfuse* chroot/root/squashfuse*
+          squashfuse*
+          chroot/squashfuse*
