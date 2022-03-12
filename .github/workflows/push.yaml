@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-      #    - name: Build x86
-      #run: ./build.sh
+    - name: Build x86
+      run: ./build.sh
 
     - name: Build aarch64
       run: ./build-aarch64.sh
@@ -24,4 +24,4 @@ jobs:
         prerelease: true
         title: "Nightly Build"
         files: |
-          squashfuse* chroot/root/squashfuse*
+          squashfuse* chroot/squashfuse*
