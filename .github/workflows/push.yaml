@@ -24,4 +24,5 @@ jobs:
         prerelease: true
         title: "Nightly Build"
         files: |
-          squashfuse* chroot/squashfuse*
+          squashfuse*
+          chroot/squashfuse*
