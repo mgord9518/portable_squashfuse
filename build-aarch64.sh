@@ -21,7 +21,7 @@ sudo mount --rbind /run/systemd chroot/run/systemd
 
 mount
 
-cat << EOF | sudo chroot chroot /usr/bin/bash
+cat << EOF | sudo chroot chroot /bin/bash
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
 sh build.sh
 EOF
