@@ -10,11 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build x86
+    - name: Build for x86_64
       run: ./build.sh
 
-    - name: Build aarch64
-      run: ./build-aarch64.sh
+    - name: Download Ubuntu aarch64
+      run: wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
+
+    - name: Build for aarch64
+      run: ./build_in_chroot.sh arm64
   
     - name: Upload build
       uses: "marvinpinto/action-automatic-releases@latest"
