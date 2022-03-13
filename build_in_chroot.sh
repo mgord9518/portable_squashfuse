@@ -2,7 +2,7 @@
 
 sudo apt install qemu-user-static
 
-mkdir -p chroot/tmp chroot/dev chroot/proc chroot/sys sfsmnt upper/usr/bin work upper/run/systemd
+mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc chrootdir/sys sfsmnt upper/usr/bin work upper/run/systemd
 
 # Move QEMU to the chroot directory
 cp /usr/bin/qemu-aarch64-static upper/usr/bin
