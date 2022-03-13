@@ -4,8 +4,6 @@
 
 [ -z $ARCH ] && ARCH=$(uname -m)
 
-sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev autoconf libtool pkg-config
-
 git clone https://github.com/vasi/squashfuse
 cd squashfuse
 mkdir -p static/lib
