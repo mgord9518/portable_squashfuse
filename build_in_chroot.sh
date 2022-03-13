@@ -2,7 +2,7 @@
 
 sudo apt install qemu-user-static
 
-mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc chrootdir/sys sfsmnt upper/usr/bin work upper/run/systemd
+mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 
 # Move QEMU to the chroot directory
 cp /usr/bin/qemu-aarch64-static upper/usr/bin
@@ -12,9 +12,7 @@ sudo mount -t squashfs "bionic-server-cloudimg-$1.squashfs" sfsmnt
 sudo mount -t overlay overlay -olowerdir=sfsmnt,upperdir=upper,workdir=work chrootdir
 
 sudo mount -o bind /proc chrootdir/proc/
-#sudo mount -t sysfs sys chrootdir/sys/
-#sudo mount -o bind /tmp chrootdir/tmp/
-sudo mount -o bind /dev chrootdir/dev/
+#sudo mount -o bind /dev chrootdir/dev/
 sudo mount --rbind /run/systemd chrootdir/run/systemd
 
 # Everything below will be run inside the chroot
