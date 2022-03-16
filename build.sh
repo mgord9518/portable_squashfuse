@@ -16,7 +16,7 @@ ln -s /usr/lib/*/libzstd.a static/lib
 ./autogen.sh
 
 # All supported compression methods
-./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
@@ -26,7 +26,7 @@ mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
 
 # ZLIB, LZ4 and XZ
-./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
+CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
@@ -36,7 +36,7 @@ mv squashfuse_ll ../squashfuse_ll_lz4_xz.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4_xz.$ARCH
 
 # ZLIB, LZ4
-./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
+CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
@@ -46,7 +46,7 @@ mv squashfuse_ll ../squashfuse_ll_lz4.$ARCH
 mv squashfuse_ls ../squashfuse_ls_lz4.$ARCH
 
 # ZLIB, XZ
-./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
+CFLAGS="-Os" ./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
@@ -56,7 +56,7 @@ mv squashfuse_ll ../squashfuse_ll_xz.$ARCH
 mv squashfuse_ls ../squashfuse_ls_xz.$ARCH
 
 # ZLIB, ZSTD
-./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
+CFLAGS="-Os" ./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
 make
 
 strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
