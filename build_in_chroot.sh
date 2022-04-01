@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt install qemu-user-static autoconf
+sudo apt install qemu-user-static
 
 mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 
@@ -17,6 +17,7 @@ sudo mount --rbind /run/systemd chrootdir/run/systemd
 
 # Everything below will be run inside the chroot
 cat << EOF | sudo chroot chrootdir /bin/bash
+sudo apt update
 sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev autoconf libtool pkg-config
 
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
