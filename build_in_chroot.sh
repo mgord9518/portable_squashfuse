@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt install qemu-user-static
+sudo apt install qemu-user-static autoconf
 
 mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 
