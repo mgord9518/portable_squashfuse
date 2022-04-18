@@ -57,5 +57,6 @@ EOF
 # --- EXIT CHROOT ---
 
 cp chrootdir/squashfuse* ../
+exit 0
 #sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
 #sudo rm -rf chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
