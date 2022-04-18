@@ -20,16 +20,16 @@ jobs:
 
     - name: Download Ubuntu image
       run: |
-      wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.squashfs
-      wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.squashfs
+        wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.squashfs
+        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.squashfs
 
     - name: Build for x86_64
       run:  ./build_in_chroot.sh amd64
 
     - name: Download Ubuntu aarch64 image
       run: |
-      wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.squashfs
-      wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
+        wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.squashfs
+        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
 
     - name: Build for aarch64
       run:  ./build_in_chroot.sh arm64
