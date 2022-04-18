@@ -28,7 +28,7 @@ cp chrootdir/squashfuse* ./
 sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
 mount
 
-exit 0
+#exit 0
 
 sudo rm -rf chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
@@ -53,3 +53,7 @@ wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.
 sh build.sh
 EOF
 # --- EXIT CHROOT ---
+
+cp chrootdir/squashfuse* ./
+sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
+sudo rm -rf chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
