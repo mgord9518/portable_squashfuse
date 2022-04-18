@@ -26,7 +26,7 @@ EOF
 
 cp chrootdir/squashfuse* ./
 sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
-
+mount
 
 exit 0
 
