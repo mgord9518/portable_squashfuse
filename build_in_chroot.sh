@@ -25,6 +25,10 @@ EOF
 # --- EXIT CHROOT ---
 
 sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
+
+
+exit 0
+
 sudo rm -rf chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 
