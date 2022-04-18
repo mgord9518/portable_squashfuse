@@ -24,6 +24,7 @@ sh build-static.sh
 EOF
 # --- EXIT CHROOT ---
 
+cp chrootdir/squashfuse* ./
 sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
 
 
