@@ -24,7 +24,7 @@ sh build-static.sh
 EOF
 # --- EXIT CHROOT ---
 
-sudo umount sfsmnt chrootdir chrootdir/proc chrootdir/run/systemd
+sudo umount sfsmnt chrootdir/proc chrootdir/run/systemd chrootdir
 sudo rm -rf chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 mkdir -p chrootdir/tmp chrootdir/dev chrootdir/proc sfsmnt upper/usr/bin work upper/run/systemd
 
