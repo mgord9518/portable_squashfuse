@@ -18,7 +18,8 @@ sudo mount --rbind /run/systemd chrootdir/run/systemd
 # Everything below will be run inside the chroot
 cat << EOF | sudo chroot chrootdir /bin/bash
 sudo apt update
-sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev autoconf libtool pkg-config
+#sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev autoconf libtool pkg-config
+sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev libfuse3-dev autoconf libtool pkg-config
 
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
 sh build.sh
