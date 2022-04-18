@@ -19,7 +19,7 @@ cat << EOF | sudo chroot chrootdir /bin/bash
 sudo apt update
 sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev libfuse3-dev autoconf libtool pkg-config
 
-wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build.sh
+wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build-static.sh
 sh build-static.sh
 EOF
 # --- EXIT CHROOT ---
