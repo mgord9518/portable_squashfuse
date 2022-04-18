@@ -2,6 +2,10 @@
 # MUST be run under Ubuntu 21.04 or newer
 # For some reason FUSE3 gets undefined references while static linking otherwise
 
+git clone https://github.com/vasi/squashfuse
+cd squashfuse
+mkdir -p static/lib
+
 ./autogen.sh
 
 # All supported compression methods
