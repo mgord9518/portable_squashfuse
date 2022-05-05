@@ -6,18 +6,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+#    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
+
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install deps
-      run:  sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev autoconf libtool pkg-config
+    - name: Download Ubuntu image
+      run: |
+        wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.squashfs
+        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.squashfs
 
     - name: Build for x86_64
-      run:  ./build.sh
+      run:  ./build_in_chroot.sh amd64
 
     - name: Download Ubuntu aarch64 image
-      run:  wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
+      run: |
+        wget https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.squashfs
+        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
 
     - name: Build for aarch64
       run:  ./build_in_chroot.sh arm64
@@ -31,4 +37,3 @@ jobs:
         title: "Monthly build"
         files: |
           squashfuse*
-          chrootdir/squashfuse*
