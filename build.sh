@@ -15,52 +15,44 @@ ln -s /usr/lib/*/libzstd.a static/lib
 
 ./autogen.sh
 
+move_bins() {
+  mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
+  mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
+  mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
+  mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
+}
+
 # All supported compression methods
 CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
 make
 
-strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-mv squashfuse ../squashfuse_lz4_xz_zstd.$ARCH
-mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd.$ARCH
-mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd.$ARCH
-mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd.$ARCH
+move_bins
 
 # ZLIB, LZ4 and XZ
 CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
 make
 
-strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-mv squashfuse ../squashfuse_lz4_xz.$ARCH
-mv squashfuse_extract ../squashfuse_extract_lz4_xz.$ARCH
-mv squashfuse_ll ../squashfuse_ll_lz4_xz.$ARCH
-mv squashfuse_ls ../squashfuse_ls_lz4_xz.$ARCH
+move_bins
+
 
 # ZLIB, LZ4
 CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
-make
+makeat least one compression library must exist musl linux
 
-strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-mv squashfuse ../squashfuse_lz4.$ARCH
-mv squashfuse_extract ../squashfuse_extract_lz4.$ARCH
-mv squashfuse_ll ../squashfuse_ll_lz4.$ARCH
-mv squashfuse_ls ../squashfuse_ls_lz4.$ARCH
+move_bins
+
 
 # ZLIB, XZ
 CFLAGS="-Os" ./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
 make
 
-strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-mv squashfuse ../squashfuse_xz.$ARCH
-mv squashfuse_extract ../squashfuse_extract_xz.$ARCH
-mv squashfuse_ll ../squashfuse_ll_xz.$ARCH
-mv squashfuse_ls ../squashfuse_ls_xz.$ARCH
+move_bins
+
 
 # ZLIB, ZSTD
 CFLAGS="-Os" ./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
 make
 
-strip -s squashfuse squashfuse_extract squashfuse_ll squashfuse_ls
-mv squashfuse ../squashfuse_zstd.$ARCH
-mv squashfuse_extract ../squashfuse_extract_zstd.$ARCH
-mv squashfuse_ll ../squashfuse_ll_zstd.$ARCH
-mv squashfuse_ls ../squashfuse_ls_zstd.$ARCH
+move_bins
+
+strip -s ../*
