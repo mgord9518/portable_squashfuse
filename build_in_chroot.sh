@@ -10,7 +10,7 @@ mkdir -p chrootdir1/tmp chrootdir1/dev chrootdir1/proc sfsmnt1 upper1/usr/bin wo
 cp /usr/bin/qemu-aarch64-static upper1/usr/bin
 
 # Mount up the chroot
-sudo mount -t squashfs ../"impish-server-cloudimg-$1.squashfs" sfsmnt1
+sudo mount -t squashfs ../"jammy-server-cloudimg-$1.squashfs" sfsmnt1
 sudo mount -t overlay overlay -olowerdir=sfsmnt1,upperdir=upper1,workdir=work1 chrootdir1
 
 sudo mount -o bind /proc chrootdir1/proc/
