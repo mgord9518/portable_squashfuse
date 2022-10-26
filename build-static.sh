@@ -9,11 +9,10 @@ cd squashfuse
 ./autogen.sh
 
 export CFLAGS='-static -Os'
-export LDFLAGS='-all-static'
 
 # All supported compression methods
 ./configure
-make
+make LDFLAGS='-all-static'
 
 mv squashfuse ../squashfuse_lz4_xz_zstd-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd-static.$ARCH
@@ -22,7 +21,7 @@ mv squashfuse_ls ../squashfuse_ls_lz4_xz_zstd-static.$ARCH
 
 # ZLIB, LZ4 and XZ
 ./configure --without-zstd
-make
+make LDFLAGS='-all-static'
 
 mv squashfuse ../squashfuse_lz4_xz-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_lz4_xz-static.$ARCH
@@ -31,7 +30,7 @@ mv squashfuse_ls ../squashfuse_ls_lz4_xz-static.$ARCH
 
 # ZLIB, LZ4
 ./configure --without-zstd --without-xz
-make
+make LDFLAGS='-all-static'
 
 mv squashfuse ../squashfuse_lz4-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_lz4-static.$ARCH
@@ -40,7 +39,7 @@ mv squashfuse_ls ../squashfuse_ls_lz4-static.$ARCH
 
 # ZLIB, XZ
 ./configure --without-zstd --without-lz4
-make
+make LDFLAGS='-all-static'
 
 mv squashfuse ../squashfuse_xz-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_xz-static.$ARCH
@@ -49,7 +48,7 @@ mv squashfuse_ls ../squashfuse_ls_xz-static.$ARCH
 
 # ZLIB, ZSTD
 ./configure --without-xz --without-lz4
-make
+make LDFLAGS='-all-static'
 
 mv squashfuse ../squashfuse_zstd-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_zstd-static.$ARCH
