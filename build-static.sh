@@ -14,6 +14,8 @@ mkdir -p static/lib
 ./configure CFLAGS='-static -Os'
 make LDFLAGS='-all-static'
 
+cat config.log
+
 mv squashfuse ../squashfuse_lz4_xz_zstd-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_lz4_xz_zstd-static.$ARCH
 mv squashfuse_ll ../squashfuse_ll_lz4_xz_zstd-static.$ARCH
