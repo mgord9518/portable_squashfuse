@@ -48,4 +48,5 @@ jobs:
         title: "Monthly build"
         files: |
           squashfuse*
+          libsquashfuse*
 #          chrootdir/squashfuse*
