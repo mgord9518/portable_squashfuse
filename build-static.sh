@@ -54,3 +54,10 @@ mv squashfuse ../squashfuse_zstd-static.$ARCH
 mv squashfuse_extract ../squashfuse_extract_zstd-static.$ARCH
 mv squashfuse_ll ../squashfuse_ll_zstd-static.$ARCH
 mv squashfuse_ls ../squashfuse_ls_zstd-static.$ARCH
+
+# Create static library
+perl -0pe "s/int main/int squashfuse_main/"
+./configure
+make LDFLAGS='-all-static'
+ar -rcs ../libsquashfuse_hl-$ARCH.a squashfuse-hl.o libsquashfuse_convenience_la-*.o libfuseprivate_la-*.o 
+
