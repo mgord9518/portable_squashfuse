@@ -20,8 +20,8 @@ sudo mount --rbind /run/systemd chrootdir1/run/systemd
 cat << EOF | sudo chroot chrootdir1 /bin/bash
 
 curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh
-distrobox create --name alpine --image alpine:3.16 --yes
-distrobox enter --root alpine -- sudo apk add autoconf git gcc automake make libc-dev fuse3-dev fuse3-static libtool zlib-dev xz-dev zstd-dev lz4-dev zlib-static zstd-static lz4-static
+distrobox create --root --name alpine --image alpine:3.16 --yes
+distrobox enter  --root alpine -- sudo apk add autoconf git gcc automake make libc-dev fuse3-dev fuse3-static libtool zlib-dev xz-dev zstd-dev lz4-dev zlib-static zstd-static lz4-static
 
 wget https://raw.githubusercontent.com/mgord9518/portable_squashfuse/main/build-static.sh
 distrobox enter --root alpine -- sh build-static.sh
