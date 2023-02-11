@@ -6,12 +6,48 @@ on:
 
 jobs:
   build:
-#    runs-on: ubuntu-18.04
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-latest  
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
+      - name: Setup latest Alpine Linux (x86_64)
+        uses: jirutka/setup-alpine@v1
+        with:
+          shell-name: alpine-x86_64.sh
+          packages: >
+            autoconf
+            git
+            gcc
+            automake
+            make
+            libc-dev
+            fuse3-dev
+            fuse3-static
+            libtool
+            zlib-dev
+            xz-dev
+            zstd-dev
+            lz4-dev
+            zlib-static
+            zstd-static
+            lz4-static
+ 
+      - name: Build (x86_64)
+        run: |
+          sh build-static.sh
+        shell: alpine-x86_64.sh {0}
+  
+      - name: Upload build
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "nightly"
+          prerelease: true
+          title: "Monthly build"
+          files: |
+            squashfuse*
+            libsquashfuse*
+  
 #    - name: Install deps
 #      run:  sudo apt install -y zlib1g-dev liblzma-dev libzstd-dev liblz4-dev make gcc libfuse-dev libfuse3-dev autoconf libtool pkg-config
 
@@ -22,31 +58,24 @@ jobs:
 #      run: |
 #        wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.squashfs
 #        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.squashfs
-    - name: Setup Alpine and deps
-      run: |
-        curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
-        distrobox create --name alpine --image alpine:3.16 --yes
-        distrobox enter alpine -- sudo apk add autoconf git gcc automake make libc-dev fuse3-dev fuse3-static libtool zlib-dev xz-dev zstd-dev lz4-dev zlib-static zstd-static lz4-static
+ #   - name: Setup Alpine and deps
+ #     run: |
+ #       curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
+ #       distrobox create --name alpine --image alpine:3.16 --yes
+ #       distrobox enter alpine -- sudo apk add autoconf git gcc automake make libc-dev fuse3-dev fuse3-static libtool zlib-dev xz-dev zstd-dev lz4-dev zlib-static zstd-static lz4-static
 
-    - name: Build for x86_64
-      run:  distrobox enter alpine -- sh build-static.sh
+  #  - name: Build for x86_64
+  #    run:  distrobox enter alpine -- sh build-static.sh
 
-    - name: Download Ubuntu aarch64 image
-      run: |
-        wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.squashfs
-        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
 
-    - name: Build for aarch64
-      run:  ./build_in_chroot.sh arm64
+
+#    - name: Download Ubuntu aarch64 image
+#      run: |
+#        wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.squashfs
+#        wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-arm64.squashfs
+
+ #   - name: Build for aarch64
+ #     run:  ./build_in_chroot.sh arm64
   
-    - name: Upload build
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "nightly"
-        prerelease: true
-        title: "Monthly build"
-        files: |
-          squashfuse*
-          libsquashfuse*
+
 #          chrootdir/squashfuse*
