@@ -13,6 +13,7 @@ jobs:
       - name: Setup latest Alpine Linux (x86_64)
         uses: jirutka/setup-alpine@v1
         with:
+          branch: edge
           shell-name: alpine-x86_64.sh
           packages: >
             autoconf
