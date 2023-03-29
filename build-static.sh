@@ -8,7 +8,7 @@ cd squashfuse
 
 ./autogen.sh
 
-export CFLAGS='-static -Os'
+export CFLAGS='-static -O3'
 
 # All supported compression methods
 ./configure
