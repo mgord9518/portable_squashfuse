@@ -37,7 +37,7 @@ move_bins
 
 # ZLIB, LZ4
 CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
-makeat least one compression library must exist musl linux
+make
 
 move_bins
 
