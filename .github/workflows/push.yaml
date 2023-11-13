@@ -2,7 +2,7 @@ name: Automatic build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, Dynamic-link ]
 
 jobs:
   build:
