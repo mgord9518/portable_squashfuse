@@ -2,7 +2,7 @@ name: Automatic build
 
 on:
   push:
-    branches: [ main, Dynamic-link ]
+    branches: [ Dynamic-link ]
 
 jobs:
   build:
@@ -27,9 +27,9 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "nightly"
+          automatic_release_tag: "dynamic"
           prerelease: true
-          title: "Monthly build"
+          title: "Monthly build (dynamic linked)"
           files: |
             squashfuse*
             libsquashfuse*
