@@ -10,64 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup latest Alpine Linux (x86_64)
-        uses: jirutka/setup-alpine@v1
-        with:
-          branch: v3.16
-          arch: x86_64
-          shell-name: alpine-x86_64.sh
-          packages: >
-            autoconf
-            git
-            gcc
-            automake
-            make
-            libc-dev
-            fuse3-dev
-            fuse3-static
-            libtool
-            zlib-dev
-            xz-dev
-            zstd-dev
-            lz4-dev
-            zlib-static
-            zstd-static
-            lz4-static
- 
-      # All non-x86 chips are emulated, thus VERY slow
-      - name: Setup latest Alpine Linux (aarch64)
-        uses: jirutka/setup-alpine@v1
-        with:
-          branch: v3.16
-          arch: aarch64
-          shell-name: alpine-aarch64.sh
-          packages: >
-            autoconf
-            git
-            gcc
-            automake
-            make
-            libc-dev
-            fuse3-dev
-            fuse3-static
-            libtool
-            zlib-dev
-            xz-dev
-            zstd-dev
-            lz4-dev
-            zlib-static
-            zstd-static
-            lz4-static
+      - name: Install deps
+        run: |
+          sudo apt update
+          sudo apt install gcc libc-dev autoconf make automake libfuse3-dev libtool zlib-dev liblzma-dev zlib1g-dev libzstd-dev liblz4-dev liblzo-dev
  
       - name: Build (x86_64)
         run: |
-          sh build-static.sh
-        shell: alpine-x86_64.sh {0}
+          sh build.sh
   
-      - name: Build (aarch64)
-        run: |
-          sh build-static.sh
-        shell: alpine-aarch64.sh {0}
+#      - name: Build (aarch64)
+#        run: |
+#          sh build-static.sh
   
       - name: Upload build
         uses: "marvinpinto/action-automatic-releases@latest"
