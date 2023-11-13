@@ -23,36 +23,36 @@ move_bins() {
 }
 
 # All supported compression methods
-CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
+CFLAGS="-O3" ./configure --disable-shared --with-lz4=./static --with-xz=./static --with-zstd=./static
 make
 
 move_bins
 
 # ZLIB, LZ4 and XZ
-CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
+CFLAGS="-O3" ./configure --disable-shared --with-lz4=./static --with-xz=./static --without-zstd
 make
 
 move_bins
 
 
 # ZLIB, LZ4
-CFLAGS="-Os" ./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
+CFLAGS="-O3" ./configure --disable-shared --with-lz4=./static --without-xz --without-zstd
 make
 
 move_bins
 
 
 # ZLIB, XZ
-CFLAGS="-Os" ./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
+CFLAGS="-O3" ./configure --disable-shared --without-lz4 --with-xz=./static --without-zstd
 make
 
 move_bins
 
 
 # ZLIB, ZSTD
-CFLAGS="-Os" ./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
+CFLAGS="-O3" ./configure --disable-shared --without-lz4 --without-xz --with-zstd=./static
 make
 
 move_bins
 
-strip -s ../*
+strip -s ../*.$ARCH
