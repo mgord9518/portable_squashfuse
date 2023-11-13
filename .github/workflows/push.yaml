@@ -13,7 +13,7 @@ jobs:
       - name: Install deps
         run: |
           sudo apt update
-          sudo apt install gcc libc-dev autoconf make automake libfuse3-dev libtool zlib-dev liblzma-dev zlib1g-dev libzstd-dev liblz4-dev liblzo2-dev
+          sudo apt install gcc libc-dev autoconf make automake libfuse3-dev libtool liblzma-dev zlib1g-dev libzstd-dev liblz4-dev liblzo2-dev
  
       - name: Build (x86_64)
         run: |
